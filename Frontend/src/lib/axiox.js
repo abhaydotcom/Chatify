@@ -3,6 +3,6 @@ import axios from 'axios'
 
 
 export const axiosInstance=axios.create({
-    baseURL:"http://localhost:9999/api",
+    baseURL:"https://chatify-backend-rouge.vercel.app/api",
     withCredentials:true
 })
