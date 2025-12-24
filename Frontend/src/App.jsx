@@ -15,7 +15,7 @@ import Navbar from './components/Navbar'
 
 export  const App = () => {
 
-  const {authUser,checkAuth,isCheckingAuth}=useAuth()
+  const {authUser,checkAuth,isCheckingAuth,onlineUsers}=useAuth()
 
     useEffect(() => {
     checkAuth();

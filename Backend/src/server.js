@@ -5,9 +5,10 @@ import cookieParser from "cookie-parser";
 import cors from 'cors'
 import authRouter from "./routes/user.route.js"
 import messageRouter from "./routes/message.route.js"
+import { app, server } from './lib/socket.js';
 
 
-const app=express();
+app
 
 const PORT=9999
 
@@ -30,7 +31,7 @@ app.get('/',(req,res)=>{
 })
 
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Server is runnig at port ${PORT}`)
     connectDb();
 })

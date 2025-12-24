@@ -34,10 +34,11 @@ const Navbar = () => {
                 {/* Profile Button */}
                 <Link 
                   to={"/update-profile"} 
-                  className="group relative flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-200 hover:shadow-lg"
+                  className="group relative flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1 rounded-xl bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-200 hover:shadow-lg"
                 >
-                  <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 group-hover:scale-110 transition-transform">
-                    <User className="size-4 sm:size-5 text-white" />
+                  <div className="rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 group-hover:scale-110 transition-transform">
+                    {/* <User className="size-4 sm:size-5 text-white" /> */}
+                    <img src={ authUser.profilePic ||"/avatar.png"} className="size-8 rounded-lg sm:size-9 text-white"  alt="" />
                   </div>
                   <span className="hidden sm:inline text-sm font-medium text-gray-700 dark:text-gray-300">
                     Profile
