@@ -6,7 +6,7 @@ import {io} from "socket.io-client"
 
 
 
-const BASE_URL="http://localhost:9999"
+const BASE_URL="https://chatify-backend-rouge.vercel.app/"
 
 export const useAuth=create((set,get)=>({
       authUser: null,
