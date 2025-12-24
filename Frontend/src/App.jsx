@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import SignUpPage from './pages/Signup'
 import LoginPage from './pages/Login'
@@ -17,6 +17,13 @@ export  const App = () => {
 
   const {authUser,checkAuth,isCheckingAuth,onlineUsers}=useAuth()
 
+
+   const location = useLocation();
+
+  const hideNavbarRoutes = ["/verify", "/verifyEmail"];
+
+  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+
     useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -30,7 +37,7 @@ export  const App = () => {
 
   return (
     <div>
-      <Navbar/>
+      {!shouldHideNavbar && <Navbar/>}
 
        <Routes>
         <Route path="/" element={authUser?<Home/>:<Navigate to='/login' />} />
