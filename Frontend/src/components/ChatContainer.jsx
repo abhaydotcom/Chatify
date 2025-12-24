@@ -7,12 +7,18 @@ import MessageSkeleton from './MessageSkelotons'
 import { formatMessageTime } from '../lib/timeFormat'
 
 function ChatContainer() {
-  const { getMessage, messages, selectedUser, isMessagesLoading } = useMessage()
+  const { getMessage, messages, selectedUser, isMessagesLoading,  subscribeToMessages,
+    unsubscribeFromMessages, } = useMessage()
   const { authUser } = useAuth()
+
 
   useEffect(() => {
     getMessage(selectedUser._id)
-  }, [])
+    
+    subscribeToMessages();
+
+    return () => unsubscribeFromMessages();
+  }, [getMessage,subscribeToMessages,unsubscribeFromMessages,selectedUser._id])
 
   const messageEndRef = useRef(null);
 

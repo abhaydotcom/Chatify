@@ -47,30 +47,31 @@ export const useMessage=create((set,get)=>({
     } catch (error ) {
          toast.error(error.response.data.message);
     }
-  },
+  }, 
 
   setSelectedUser:(selectedUser)=>set({selectedUser}),
+ subscribeToMessages: () => {
+    const { selectedUser } = get();
+    if (!selectedUser) return;
 
-  subscribeToMessage:()=>{
-    const {selectedUser}=get();
-    if(!selectedUser)return
+    const socket = useAuth.getState().socket; 
+ 
 
-    const socket=useAuth.getState().socket
-
-    socket.on("newMessage",(newMessage)=>{
-       const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
+    socket.on("newMessage", (newMessage) => {
+      const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
+       
       if (!isMessageSentFromSelectedUser) return;
 
       set({
         messages: [...get().messages, newMessage],
       });
-    })
+    });
   },
-    unsubscribeFromMessages: () => {
+
+  unsubscribeFromMessages: () => {
     const socket = useAuth.getState().socket;
     socket.off("newMessage");
   },
-
 
 
 })) 

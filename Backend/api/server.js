@@ -1,14 +1,13 @@
 import express from 'express'
 import 'dotenv/config'
-import { connectDb } from './database/db.js';
+import { connectDb } from '../src/database/db.js';
 import cookieParser from "cookie-parser";
 import cors from 'cors'
-import authRouter from "./routes/user.route.js"
-import messageRouter from "./routes/message.route.js"
-import { app, server } from './lib/socket.js';
+import authRouter from "../src/routes/user.route.js"
+import messageRouter from "../src/routes/message.route.js"
+import { app, server } from '../src/lib/socket.js';
 
 
-app
 
 const PORT=9999
 
@@ -33,5 +32,6 @@ app.get('/',(req,res)=>{
 
 server.listen(PORT,()=>{
     console.log(`Server is runnig at port ${PORT}`)
-    connectDb();
+   connectDb();
 })
+ 
