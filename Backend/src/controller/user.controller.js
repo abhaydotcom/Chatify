@@ -38,7 +38,7 @@ export const Signup=async(req,res)=>{
         let token;
         if(newUser){
            token= generateToken(newUser._id,res)
-           verifyEmail(token,email)
+        //    verifyEmail(token,email)
            await newUser.save()
 
         }

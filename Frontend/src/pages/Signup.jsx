@@ -35,7 +35,7 @@ const SignUpPage = () => {
     const res = await signup(formData);
 
     if (res?.success) {
-      navigate('/verifyEmail');
+      navigate('/login');
     }
   };
 
