@@ -15,7 +15,7 @@ import Navbar from './components/Navbar'
 
 export  const App = () => {
 
-  const {authUser,checkAuth,isCheckingAuth,onlineUsers}=useAuth()
+  const {authUser,checkAuth,isCheckingAuth,onlineUsers,connectSocket}=useAuth()
 
 
    const location = useLocation();
@@ -25,6 +25,8 @@ export  const App = () => {
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
     useEffect(() => {
+
+
     checkAuth();
   }, [checkAuth]);
 
