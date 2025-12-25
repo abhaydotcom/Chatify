@@ -1,10 +1,29 @@
 import { X } from "lucide-react";
 import { useAuth } from "../store/useAuth";
 import { useMessage } from "../store/useMessage";
-
+import axios from "axios";
+import toast from "react-hot-toast";
+import { MdDelete } from "react-icons/md";
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useMessage();
   const { onlineUsers } = useAuth();
+
+  const deleteAllMsg=async()=>{
+     const confirmDelete = window.confirm(
+    "Are you sure you want to delete this entire conversation?"
+  );
+
+  if (!confirmDelete) return;
+
+    try {
+      const res=await axios.delete(`http://localhost:9999/api/message/delete-msg/${selectedUser._id}`)
+
+      toast.success(`${res.data.deletedCount} Msg deleted succesfully`)
+      
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+  }
 
   return (
     <div className="p-3 sm:p-4 border-b border-gray-800 bg-gray-900">
@@ -39,6 +58,11 @@ const ChatHeader = () => {
             </p>
           </div>
         </div>
+        <button 
+        onClick={()=>deleteAllMsg()}
+        className="text-white border p-2 rounded-xl h-15px hover:bg-red-700 transition-all duration-300">
+          <MdDelete/>
+        </button>
 
         {/* Close button */}
         <button 
