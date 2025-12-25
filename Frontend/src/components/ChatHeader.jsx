@@ -4,6 +4,7 @@ import { useMessage } from "../store/useMessage";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
+import { axiosInstance } from "../lib/axiox";
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useMessage();
   const { onlineUsers } = useAuth();
@@ -16,7 +17,7 @@ const ChatHeader = () => {
   if (!confirmDelete) return;
 
     try {
-      const res=await axios.delete(`http://localhost:9999/api/message/delete-msg/${selectedUser._id}`)
+      const res=await axiosInstance.delete(`/message/delete-msg/${selectedUser._id}`)
 
       toast.success(`${res.data.deletedCount} Msg deleted succesfully`)
       
