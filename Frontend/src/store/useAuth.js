@@ -24,8 +24,7 @@ export const useAuth=create((set,get)=>({
     try {
         const res=await axiosInstance.get("/auth/check-auth")
         set({authUser:res.data})
-         get().connectSocket()
-
+    
     } catch (error) {
         set({authUser:null})
         console.log("error in check auth store",error)
@@ -59,10 +58,14 @@ export const useAuth=create((set,get)=>({
   login:async(data)=>{
     set({isLoggingIn:true})
     try {
-        const res=await axiosInstance.post("/auth/login",data)
+        await axiosInstance.post("/auth/login",data,{withCredentials:true})
+          const res = await axiosInstance.get("/auth/check-auth", {
+      withCredentials: true,
+    });
         set({authUser:res.data})
+      
               toast.success("Logged in successfully");
-              get().connectSocket();
+
          return {success:true}
         
     } catch (error) {
@@ -79,7 +82,7 @@ export const useAuth=create((set,get)=>({
       await axiosInstance.post("/auth/logout");
       set({ authUser: null });
           toast.success("Logged out successfully");
-          get().disconnectSocket()
+         
      
     } catch (error) {
      console.log(error)
@@ -122,6 +125,8 @@ export const useAuth=create((set,get)=>({
 
 
   },
+
+ 
 
     disconnectSocket: () => {
     if (get().socket?.connected) get().socket.disconnect();

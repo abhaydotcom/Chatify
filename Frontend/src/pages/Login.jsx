@@ -17,6 +17,7 @@ const LoginPage = () => {
     const res = await login(formData);
 
     if (res?.success) {
+      
       navigate('/');
     }
   };

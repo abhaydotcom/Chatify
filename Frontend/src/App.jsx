@@ -15,7 +15,7 @@ import Navbar from './components/Navbar'
 
 export  const App = () => {
 
-  const {authUser,checkAuth,isCheckingAuth,onlineUsers,connectSocket}=useAuth()
+  const {authUser,checkAuth,isCheckingAuth,onlineUsers,connectSocket,disconnectSocket}=useAuth()
 
 
    const location = useLocation();
@@ -24,11 +24,22 @@ export  const App = () => {
 
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
+
+
     useEffect(() => {
-
-
     checkAuth();
   }, [checkAuth]);
+
+  
+useEffect(() => {
+  if (authUser?._id) {
+    connectSocket(authUser._id);
+  } else {
+    disconnectSocket();
+  }
+}, [authUser]);
+
+ 
 
     if (isCheckingAuth && !authUser)
     return (
