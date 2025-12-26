@@ -6,7 +6,8 @@ import {io} from "socket.io-client"
 
 
 
-const BASE_URL="https://chatify-backend-zdm0.onrender.com"
+ const BASE_URL="https://chatify-backend-zdm0.onrender.com"
+// const BASE_URL="http://localhost:9999/api"
 
 export const useAuth=create((set,get)=>({
       authUser: null,
